@@ -55,12 +55,30 @@ namespace WB.Api.Controllers
         [HttpPost]
         public MessageJSON Create([FromBody]bsProject entity)
         {
-            MessageJSON mj = new MessageJSON(MessageState.fail,"创建项目失败",MessageIcon.no);
+            MessageJSON mj = new MessageJSON(MessageState.fail, "创建项目失败，是否存在相同的项目名", MessageIcon.no);
             AuthInfo authInfo = this.RequestContext.RouteData.Values["token"] as AuthInfo;
             entity.UserID = authInfo.UserId;
             if (bsProjectService.Create(entity))
             {
                 mj = new MessageJSON(MessageState.success, "创建项目成功", MessageIcon.yes);
+            }
+            return mj;
+        }
+
+        /// <summary>
+        /// 修改项目
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public MessageJSON Update([FromBody]bsProject entity)
+        {
+            MessageJSON mj = new MessageJSON(MessageState.fail, "修改项目失败，是否存在相同的项目名", MessageIcon.no);
+            AuthInfo authInfo = this.RequestContext.RouteData.Values["token"] as AuthInfo;
+            entity.UserID = authInfo.UserId;
+            if (bsProjectService.Update(entity))
+            {
+                mj = new MessageJSON(MessageState.success, "修改项目成功", MessageIcon.yes);
             }
             return mj;
         }

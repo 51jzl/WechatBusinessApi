@@ -39,5 +39,23 @@ namespace WB.BusinessClasses
             }
             return false;
         }
+
+        /// <summary>
+        /// 修改项目
+        /// </summary>
+        /// <param name="entity"></param>
+        public bool Update(bsProject entity)
+        {
+            try
+            {
+                repository.Update(entity);
+                return true;
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
     }
 }

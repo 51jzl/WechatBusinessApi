@@ -518,6 +518,13 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
+        <member name="M:WB.Api.Controllers.ProjectController.Update(WB.Entity.bsProject)">
+            <summary>
+            修改项目
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
         <member name="T:WB.Api.Models.AuthInfo">
             <summary>
             表示jwt的payload
