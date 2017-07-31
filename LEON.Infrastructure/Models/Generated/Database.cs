@@ -26,9 +26,10 @@
 // 
 //     Connection String Name: `SqlServer`
 //     Provider:               `System.Data.SqlClient`
-//     Connection String:      `Data Source=.;Initial Catalog=WechatBusiness;Persist Security Info=True;User ID=sa;password=**zapped**;Pooling=True`
+//     Connection String:      `Data Source=139.196.49.210;Initial Catalog=WechatBusiness;Persist Security Info=True;User ID=sa;password=**zapped**;Pooling=True`
 //     Schema:                 ``
 //     Include Views:          `False`
+
 
 
 using System;
@@ -36,10 +37,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PetaPoco;
-using LEON;
 
 namespace WB
 {
+
 	public partial class WBDB : Database
 	{
 		public WBDB() 
@@ -87,13 +88,16 @@ namespace WB
 				_instance=null;
 		}
         
+
 		public class Record<T> where T:new()
 		{
 			public static WBDB repo { get { return WBDB.GetInstance(); } }
 			public bool IsNew() { return repo.IsNew(this); }
 			public object Insert() { return repo.Insert(this); }
+
 			public void Save() { repo.Save(this); }
 			public int Update() { return repo.Update(this); }
+
 			public int Update(IEnumerable<string> columns) { return repo.Update(this, columns); }
 			public static int Update(string sql, params object[] args) { return repo.Update<T>(sql, args); }
 			public static int Update(Sql sql) { return repo.Update<T>(sql); }
@@ -123,51 +127,211 @@ namespace WB
 			public static Page<T> Page(long page, long itemsPerPage, Sql sql) { return repo.Page<T>(page, itemsPerPage, sql); }
 			public static IEnumerable<T> Query(string sql, params object[] args) { return repo.Query<T>(sql, args); }
 			public static IEnumerable<T> Query(Sql sql) { return repo.Query<T>(sql); }
+
 		}
+
 	}
 	
 
+
+
     
+
 	[TableName("dbo.bs_Project")]
+
+
+
 	[PrimaryKey("ID")]
+
+
+
+
 	[ExplicitColumns]
-    public partial class bs_Project : IEntity  
+
+    public partial class bs_Project : WBDB.Record<bs_Project>  
     {
+
+
+
 		[Column] public long ID { get; set; }
-		[Column] public int UserID { get; set; }
+
+
+
+
+
+		[Column] public long UserID { get; set; }
+
+
+
+
+
 		[Column] public string Name { get; set; }
+
+
+
+
+
 		[Column] public string Company { get; set; }
+
+
+
+
+
 		[Column] public bool Enable { get; set; }
 
-        #region IEntity member
 
-		object IEntity.EntityId { get { return this.ID; } }
 
-		bool IEntity.IsDeletedInDatabase { get; set; }
-
-		#endregion
 	}
+
     
-	[TableName("dbo.tn_Users")]
-	[PrimaryKey("UserId")]
+
+	[TableName("dbo.bs_ProxyLevel")]
+
+
+
+	[PrimaryKey("ID")]
+
+
+
+
 	[ExplicitColumns]
-    public partial class tn_User : IEntity  
+
+    public partial class bs_ProxyLevel : WBDB.Record<bs_ProxyLevel>  
     {
+
+
+
+		[Column] public long ID { get; set; }
+
+
+
+
+
+		[Column] public long ProjectId { get; set; }
+
+
+
+
+
+		[Column] public long ParentId { get; set; }
+
+
+
+
+
+		[Column] public string Name { get; set; }
+
+
+
+
+
+		[Column] public int DisplayOrder { get; set; }
+
+
+
+	}
+
+    
+
+	[TableName("dbo.tn_Users")]
+
+
+
+	[PrimaryKey("UserId")]
+
+
+
+
+	[ExplicitColumns]
+
+    public partial class tn_User : WBDB.Record<tn_User>  
+    {
+
+
+
 		[Column] public long UserId { get; set; }
+
+
+
+
+
 		[Column] public string UserName { get; set; }
+
+
+
+
+
 		[Column] public string Password { get; set; }
+
+
+
+
+
 		[Column] public int PasswordFormat { get; set; }
+
+
+
+
+
 		[Column] public DateTime DateCreated { get; set; }
+
+
+
+
+
 		[Column] public DateTime LastActivityTime { get; set; }
 
-        #region IEntity member
 
-		object IEntity.EntityId { get { return this.UserId; } }
 
-		bool IEntity.IsDeletedInDatabase { get; set; }
-
-		#endregion
 	}
 
-}
+    
 
+	[TableName("dbo.tn_Verification")]
+
+
+
+	[PrimaryKey("ID")]
+
+
+
+
+	[ExplicitColumns]
+
+    public partial class tn_Verification : WBDB.Record<tn_Verification>  
+    {
+
+
+
+		[Column] public long ID { get; set; }
+
+
+
+
+
+		[Column] public int Type { get; set; }
+
+
+
+
+
+		[Column] public string To { get; set; }
+
+
+
+
+
+		[Column] public string VerifyCode { get; set; }
+
+
+
+
+
+		[Column] public DateTime DateCreated { get; set; }
+
+
+
+	}
+
+
+}

@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PetaPoco;
-using LEON;
 
 namespace <#=Namespace #>
 {
@@ -157,7 +156,7 @@ foreach(Table tbl in from t in tables where !t.Ignore select t)
 <# if (ExplicitColumns) { #>
 	[ExplicitColumns]
 <# } #>
-    public partial class <#=tbl.ClassName#> <# if (GenerateOperations) { #>: IEntity <# } #> 
+    public partial class <#=tbl.ClassName#> <# if (GenerateOperations) { #>: <#=RepoName#>.Record<<#=tbl.ClassName#>> <# } #> 
     {
 <#
 foreach(Column col in from c in tbl.Columns where !c.Ignore select c)
@@ -194,16 +193,7 @@ foreach(Column col in from c in tbl.Columns where !c.Ignore select c)
 <# } #>
 <# } #>
 <# } #>
-
-        #region IEntity member
-
-		object IEntity.EntityId { get { return this.<#=tbl.PK.Name#>; } }
-
-		bool IEntity.IsDeletedInDatabase { get; set; }
-
-		#endregion
 	}
 <# } #>
-
 <# } #>
 }

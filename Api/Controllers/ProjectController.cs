@@ -18,7 +18,7 @@ namespace WB.Api.Controllers
     [ApiAuthorize]
     public class ProjectController : ApiController
     {
-        public bsProjectService bsProjectService = DIContainer.Resolve<bsProjectService>();
+        public ProjectService projectService = DIContainer.Resolve<ProjectService>();
 
         /// <summary>
         /// 获取用户所有项目
@@ -29,7 +29,7 @@ namespace WB.Api.Controllers
         {
             MessageJSON mj = new MessageJSON(MessageState.success, "");
             AuthInfo authInfo = this.RequestContext.RouteData.Values["token"] as AuthInfo;
-            mj.Data = bsProjectService.Query(authInfo.UserId);
+            mj.Data = projectService.Query(authInfo.UserId);
             return mj;
         }
 
@@ -43,7 +43,7 @@ namespace WB.Api.Controllers
         {
             MessageJSON mj = new MessageJSON(MessageState.success, "");
             AuthInfo authInfo = this.RequestContext.RouteData.Values["token"] as AuthInfo;
-            mj.Data = bsProjectService.Query(authInfo.UserId, name);
+            mj.Data = projectService.Query(authInfo.UserId, name);
             return mj;
         }
 
@@ -58,7 +58,7 @@ namespace WB.Api.Controllers
             MessageJSON mj = new MessageJSON(MessageState.fail, "创建项目失败，是否存在相同的项目名", MessageIcon.no);
             AuthInfo authInfo = this.RequestContext.RouteData.Values["token"] as AuthInfo;
             entity.UserID = authInfo.UserId;
-            if (bsProjectService.Create(entity))
+            if (projectService.Create(entity))
             {
                 mj = new MessageJSON(MessageState.success, "创建项目成功", MessageIcon.yes);
             }
@@ -76,7 +76,7 @@ namespace WB.Api.Controllers
             MessageJSON mj = new MessageJSON(MessageState.fail, "修改项目失败，是否存在相同的项目名", MessageIcon.no);
             AuthInfo authInfo = this.RequestContext.RouteData.Values["token"] as AuthInfo;
             entity.UserID = authInfo.UserId;
-            if (bsProjectService.Update(entity))
+            if (projectService.Update(entity))
             {
                 mj = new MessageJSON(MessageState.success, "修改项目成功", MessageIcon.yes);
             }

@@ -41,8 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\bsProjectRepository.cs" />
-    <Compile Include="Server\bsProjectService.cs" />
+    <Compile Include="Repositories\ProjectRepository.cs" />
+    <Compile Include="Server\ProjectService.cs" />
+    <Compile Include="Server\ProxyService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
