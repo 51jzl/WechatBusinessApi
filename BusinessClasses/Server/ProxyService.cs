@@ -50,7 +50,7 @@ namespace WB.BusinessClasses
         {
             try
             {
-                object id = entity.Update(new string[] { "ParentId", "Name", "DisplayOrder" });
+                object id = entity.Update(new string[] { "ParentId", "Name", "DisplayOrder", "PurchaseAmount", "ReplenishmentAmount" });
                 long intid = 0;
                 if (id != null)
                 {

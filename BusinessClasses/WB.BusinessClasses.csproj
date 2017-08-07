@@ -44,8 +44,18 @@
     <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Server\ProjectService.cs" />
     <Compile Include="Server\ProxyService.cs" />
+    <Compile Include="t4\Generated\Database.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="t4\Generated\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\WB.Entity.csproj">
       <Project>{6FDBEDFF-A967-4E74-BFD2-E6980A865D31}</Project>
@@ -55,6 +65,18 @@
       <Project>{0F0A9ACC-5F76-4A61-814A-1766AA5FC050}</Project>
       <Name>LEON.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="t4\Generated\PetaPoco.Core.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="t4\Generated\PetaPoco.Generator.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

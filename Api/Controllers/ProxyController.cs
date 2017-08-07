@@ -1,6 +1,7 @@
 ﻿using LEON;
 using System.Web.Http;
 using WB.Api.Models;
+using WB.Api.Secure;
 using WB.BusinessClasses;
 
 namespace WB.Api.Controllers
@@ -8,6 +9,7 @@ namespace WB.Api.Controllers
     /// <summary>
     /// 代理控制器
     /// </summary>
+    [ApiAuthorize]
     public class ProxyLevelController : ApiController
     {
         public ProxyLevelService proxylevelservice = DIContainer.Resolve<ProxyLevelService>();
